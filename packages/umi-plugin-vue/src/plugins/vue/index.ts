@@ -13,7 +13,7 @@ export default function(api) {
 
     webpackConfig.module
       .rule("exclude")
-      .exclude.add(/\.(vue)$/)
+      .exclude.add(/\.vue$/)
       .end();
 
     webpackConfig.module

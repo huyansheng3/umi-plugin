@@ -10,6 +10,13 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var fs_1 = require("fs");
 var path_1 = require("path");
@@ -68,7 +75,7 @@ function getPageModels(cwd, api) {
 function getModelsWithRoutes(routes, api) {
     var paths = api.paths;
     return routes.reduce(function (memo, route) {
-        return memo.concat((route.component && route.component.indexOf("() =>") !== 0
+        return __spreadArrays(memo, (route.component && route.component.indexOf("() =>") !== 0
             ? getPageModels(path_1.join(paths.cwd, route.component), api)
             : []), (route.children ? getModelsWithRoutes(route.children, api) : []));
     }, []);
@@ -78,7 +85,7 @@ function getGlobalModels(api, shouldImportDynamic) {
     var models = getModel(paths.absSrcPath, api);
     if (!shouldImportDynamic) {
         // 不做按需加载时，还需要额外载入 page 路由的 models 文件
-        models = models.concat(getModelsWithRoutes(routes, api));
+        models = __spreadArrays(models, getModelsWithRoutes(routes, api));
         // 去重
         models = uniq(models);
     }
@@ -154,7 +161,7 @@ function default_1(api, opts) {
             specifier: "_dvaDynamic"
         });
         api.modifyAFWebpackOpts(function (opts) {
-            return __assign({}, opts, { disableDynamicImport: false });
+            return __assign(__assign({}, opts), { disableDynamicImport: false });
         });
         api.modifyRouteComponent(function (memo, args) {
             var importPath = args.importPath, component = args.component;

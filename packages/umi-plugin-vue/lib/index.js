@@ -10,6 +10,13 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __spreadArrays = (this && this.__spreadArrays) || function () {
+    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
+    for (var r = Array(s), k = 0, i = 0; i < il; i++)
+        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
+            r[k] = a[j];
+    return r;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = require("path");
 var defaultOpts = {
@@ -18,9 +25,6 @@ var defaultOpts = {
     },
     routes: {
         exclude: [/model/]
-    },
-    dll: {
-        include: []
     },
     dynamicImport: {
         webpackChunkName: true
@@ -34,20 +38,19 @@ function getId(id) {
     return "umi-plugin-vue:" + id;
 }
 function default_1(api, options) {
-    var option = __assign({}, defaultOpts, options);
+    var option = __assign(__assign({}, defaultOpts), options);
     var service = api.service, config = api.config, paths = api.paths;
-    service.paths = __assign({}, service.paths, { defaultEntryTplPath: template("entry.js.mustache"), defaultRouterTplPath: template("router.js.mustache"), defaultDocumentPath: template("document.ejs") });
+    service.paths = __assign(__assign({}, service.paths), { defaultEntryTplPath: template("entry.js.mustache"), defaultRouterTplPath: template("router.js.mustache"), defaultDocumentPath: template("document.ejs") });
     api.addVersionInfo([
         "vue@" + require("vue/package").version,
         "vue-router@" + require("vue-router/package").version,
-        "vue-template-compiler@" + require("vue-template-compiler/package").version,
+        "vue-template-compiler@" + require("vue-template-compiler/package").version
     ]);
     api.modifyAFWebpackOpts(function (memo) {
-        return __assign({}, memo, { alias: __assign({}, (memo.alias || {}), { "@ddot/umi-vue/dynamic": "@ddot/umi-vue/lib/dynamic.js" }) });
+        return __assign(__assign({}, memo), { alias: __assign(__assign({}, (memo.alias || {})), { "@ddot/umi-vue/dynamic": "@ddot/umi-vue/lib/dynamic.js" }) });
     });
     var plugins = {
         hardSource: function () { return require("./plugins/hardSource").default; },
-        dll: function () { return require("./plugins/dll").default; },
         routes: function () { return require("./plugins/routes").default; },
         dva: function () { return require("./plugins/dva").default; }
     };
@@ -60,13 +63,13 @@ function default_1(api, options) {
             var opts = option[key];
             if (key === "dll") {
                 var havDva = option["dva"] ? ["dva-core", "dva-immer"] : [];
-                opts.include = (opts.include || []).concat([
+                opts.include = (opts.include || []).concat(__spreadArrays([
                     "vue",
                     "vue-router"
-                ].concat(havDva));
+                ], havDva));
             }
             else if (key === "dva") {
-                opts = __assign({}, opts, { shouldImportDynamic: option.dynamicImport });
+                opts = __assign(__assign({}, opts), { shouldImportDynamic: option.dynamicImport });
             }
             api.registerPlugin({
                 id: getId(key),

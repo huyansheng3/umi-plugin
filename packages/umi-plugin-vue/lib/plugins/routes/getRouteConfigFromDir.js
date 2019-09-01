@@ -62,7 +62,7 @@ function handleFile(paths, absPath, memo, file) {
     if (stats.isDirectory()) {
         var newDirPath = path_1.join(dirPath, file);
         // routes & _layout
-        var children = getRouteConfigFromDir(__assign({}, paths, { dirPath: newDirPath }));
+        var children = getRouteConfigFromDir(__assign(__assign({}, paths), { dirPath: newDirPath }));
         var absLayoutFile = utils_1.findJSFile(path_1.join(absPagesPath, newDirPath), "_layout");
         if (absLayoutFile) {
             addRoute(memo, {

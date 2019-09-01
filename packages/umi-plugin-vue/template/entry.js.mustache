@@ -1,8 +1,10 @@
 {{{ polyfillImports }}}
 {{{ importsAhead }}}
-import '@tmp/initHistory';
+import '@tmp/history';
 import Vue from 'vue';
 {{{ imports }}}
+
+window.g_vue = Vue
 
 // runtime plugins
 window.g_plugins = require('umi/_runtimePlugin');

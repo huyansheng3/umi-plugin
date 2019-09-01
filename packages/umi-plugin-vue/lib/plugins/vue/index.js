@@ -10,7 +10,7 @@ function default_1(api) {
         webpackConfig.resolve.extensions.merge([".vue"]);
         webpackConfig.module
             .rule("exclude")
-            .exclude.add(/\.(vue)$/)
+            .exclude.add(/\.vue$/)
             .end();
         webpackConfig.module
             .delete("jsx")
@@ -25,7 +25,7 @@ function default_1(api) {
         webpackConfig.plugin("vue-plugin").use(VueLoaderPlugin);
         return webpackConfig;
     });
-    api.addRuntimePlugin(path_1.join(__dirname, './runtime'));
+    api.addRuntimePlugin(path_1.join(__dirname, "./runtime"));
     api.modifyEntryRender(function () {
         return "\n    window.g_plugins.apply('rootContainer', {\n      initialValue: " + routerVue + ",\n    }).$mount('#" + mountElementId + "');";
     });

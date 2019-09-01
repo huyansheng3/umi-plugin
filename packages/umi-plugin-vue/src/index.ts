@@ -7,9 +7,6 @@ const defaultOpts = {
   routes: {
     exclude: [/model/]
   },
-  dll: {
-    include: []
-  },
   dynamicImport: {
     webpackChunkName: true
   },
@@ -57,7 +54,6 @@ export default function(api, options) {
 
   const plugins = {
     hardSource: () => require("./plugins/hardSource").default,
-    dll: () => require("./plugins/dll").default,
 
     routes: () => require("./plugins/routes").default,
     dva: () => require("./plugins/dva").default

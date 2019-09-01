@@ -1,5 +1,5 @@
 {
-  "name": "@ddot/umi-plugin-vue",
+  "name": "umi-plugin-vue",
   "version": "0.0.7",
   "description": "A umi plugin for support vuejs",
   "main": "./lib/index.js",
@@ -36,7 +36,8 @@
     "@types/node": "^10.9.4",
     "mocha": "^5.2.0",
     "ts-mocha": "^2.0.0",
-    "typescript": "^3.0.3"
+    "typescript": "^3.0.3",
+    "webpack": "^4.39.3"
   },
   "dependencies": {
     "@ddot/umi-vue": "^0.0.4",
