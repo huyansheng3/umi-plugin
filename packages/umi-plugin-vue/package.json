@@ -1,6 +1,6 @@
 {
-  "name": "umi-plugin-vue",
-  "version": "0.0.7",
+  "name": "@didi/umi-plugin-vue",
+  "version": "0.0.1",
   "description": "A umi plugin for support vuejs",
   "main": "./lib/index.js",
   "authors": [

@@ -27,7 +27,7 @@ function default_1(api) {
     });
     api.addRuntimePlugin(path_1.join(__dirname, "./runtime"));
     api.modifyEntryRender(function () {
-        return "\n    window.g_plugins.apply('rootContainer', {\n      initialValue: " + routerVue + ",\n    }).$mount('#" + mountElementId + "');";
+        return "\n    window.g_plugins.apply('rootContainer', {\n      initialValue: {router: " + routerVue + ", Vue},\n    }).$mount('#" + mountElementId + "');";
     });
     api.modifyEntryHistory(function () {
         return routerVue + ".history";

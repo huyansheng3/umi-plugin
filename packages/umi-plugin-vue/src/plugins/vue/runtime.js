@@ -1,6 +1,4 @@
-import Vue from "vue";
-
-export function rootContainer(router) {
+export function rootContainer({ router, Vue }) {
   return new Vue({
     router,
     render(h) {

@@ -36,7 +36,7 @@ export default function(api) {
   api.modifyEntryRender(() => {
     return `
     window.g_plugins.apply('rootContainer', {
-      initialValue: ${routerVue},
+      initialValue: {router: ${routerVue}, Vue},
     }).$mount('#${mountElementId}');`;
   });
 

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var vue_1 = require("vue");
-function rootContainer(router) {
-    return new vue_1.default({
+function rootContainer(_a) {
+    var router = _a.router, Vue = _a.Vue;
+    return new Vue({
         router: router,
         render: function (h) {
             return h("router-view");
