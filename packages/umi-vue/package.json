@@ -1,5 +1,5 @@
 {
-  "name": "@ddot/umi-vue",
+  "name": "@didi/umi-vue",
   "version": "0.0.4",
   "main": "./lib/index.js",
   "authors": [
@@ -8,6 +8,10 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/jetsly/umi-plugin/tree/master/packages/umi-vue"
+  },
+  "scripts": {
+    "test": "ts-mocha  src/**/*.spec.ts",
+    "prepublish": "tsc"
   },
   "homepage": "https://github.com/jetsly/umi-plugin/tree/master/packages/umi-vue",
   "bugs": {
@@ -20,12 +24,11 @@
     "index.d.ts"
   ],
   "dependencies": {
-    "dva-core": "^1.4.0",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.isequal": "^4.5.0"
+    "vuex": "^3.1.1"
   },
   "devDependencies": {
     "@types/node": "^10.11.4",
-    "typescript": "^3.1.1"
+    "typescript": "^3.1.1",
+    "vue": "^2.6.10"
   }
 }

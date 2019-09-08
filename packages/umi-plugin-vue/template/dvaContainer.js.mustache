@@ -1,21 +1,14 @@
 import Vue from 'vue';
-import dva from '@ddot/umi-vue';
-import createLoading from 'dva-loading';
+import umiVue from '@ddot/umi-vue';
 
-const runtimeDva = window.g_plugins.mergeConfig('dva');
+const runtimeVuex = window.g_plugins.mergeConfig('vuex');
 
-let app = dva({
-  {{{ExtendDvaConfig}}}
-  ...(runtimeDva.config || {}),
+let app = umiVue({
+  ...(runtimeVuex.config || {}),
 });
+
 window.g_app = app;
 
-(runtimeDva.plugins || []).forEach(plugin => {
-  app.use(plugin);
-});
-
-app.use(createLoading());
 {{{RegisterPlugins}}}
 {{{RegisterModels}}}
-app.start()
 

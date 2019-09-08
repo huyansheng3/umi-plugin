@@ -1,5 +1,5 @@
 {
-  "name": "create-umi-vue",
+  "name": "@didi/create-umi-vue",
   "version": "0.0.13",
   "description": "Creates a vue UmiJS application using the command line.",
   "bin": {

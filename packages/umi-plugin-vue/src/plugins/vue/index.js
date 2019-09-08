@@ -3,7 +3,8 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 
 const routerVue = `require('./router').default`;
 
-export default function(api) {
+export default function(api, opts = {}) {
+  const { vueLoaderOptions = {} } = opts;
   const { config, paths } = api;
 
   const mountElementId = config.mountElementId || "root";
@@ -25,7 +26,8 @@ export default function(api) {
       .exclude.add(/node_modules/)
       .end()
       .use("vue-loader")
-      .loader(require.resolve("vue-loader"));
+      .loader(require.resolve("vue-loader"))
+      .options(vueLoaderOption);
     webpackConfig.plugin("vue-plugin").use(VueLoaderPlugin);
 
     return webpackConfig;

@@ -18,6 +18,7 @@ var __spreadArrays = (this && this.__spreadArrays) || function () {
     return r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+// import { compatDirname } from 'umi-utils';
 var path_1 = require("path");
 var defaultOpts = {
     dva: {
@@ -46,6 +47,11 @@ function default_1(api, options) {
         "vue-router@" + require("vue-router/package").version,
         "vue-template-compiler@" + require("vue-template-compiler/package").version
     ]);
+    // const vueDir = compatDirname(
+    //   'vue/package.json',
+    //   service.cwd,
+    //   dirname(require.resolve('vue/package.json')),
+    // );
     api.modifyAFWebpackOpts(function (memo) {
         return __assign(__assign({}, memo), { alias: __assign(__assign({}, (memo.alias || {})), { "@ddot/umi-vue/dynamic": "@ddot/umi-vue/lib/dynamic.js" }) });
     });

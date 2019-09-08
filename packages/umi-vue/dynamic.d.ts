@@ -1,2 +1,2 @@
-declare const _default: (config: any) => () => Promise<{}>;
+declare const _default: (config: any) => () => Promise<unknown>;
 export default _default;

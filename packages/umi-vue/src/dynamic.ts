@@ -6,7 +6,7 @@ interface Window {
 const cached = {};
 const registerModel = model => {
   if (!cached[model.namespace]) {
-    window.g_app.changeModel(model);
+    window.g_app.model(model);
     cached[model.namespace] = 1;
   }
 };

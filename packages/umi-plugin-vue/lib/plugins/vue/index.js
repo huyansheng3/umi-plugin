@@ -3,7 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var path_1 = require("path");
 var VueLoaderPlugin = require("vue-loader/lib/plugin");
 var routerVue = "require('./router').default";
-function default_1(api) {
+function default_1(api, opts) {
+    if (opts === void 0) { opts = {}; }
+    var _a = opts.vueLoaderOptions, vueLoaderOptions = _a === void 0 ? {} : _a;
     var config = api.config, paths = api.paths;
     var mountElementId = config.mountElementId || "root";
     api.chainWebpackConfig(function (webpackConfig) {
@@ -21,7 +23,8 @@ function default_1(api) {
             .exclude.add(/node_modules/)
             .end()
             .use("vue-loader")
-            .loader(require.resolve("vue-loader"));
+            .loader(require.resolve("vue-loader"))
+            .options(vueLoaderOption);
         webpackConfig.plugin("vue-plugin").use(VueLoaderPlugin);
         return webpackConfig;
     });

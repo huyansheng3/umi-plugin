@@ -1,6 +1,6 @@
 {
   "name": "@didi/umi-plugin-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A umi plugin for support vuejs",
   "main": "./lib/index.js",
   "authors": [
@@ -40,7 +40,7 @@
     "webpack": "^4.39.3"
   },
   "dependencies": {
-    "@ddot/umi-vue": "^0.0.4",
+    "@didi/umi-vue": "^0.0.4",
     "dva-immer": "^0.2.3",
     "dva-loading": "^2.0.5",
     "globby": "^7.1.1",

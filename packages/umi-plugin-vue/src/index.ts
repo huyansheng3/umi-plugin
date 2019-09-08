@@ -1,4 +1,5 @@
-import { join } from "path";
+// import { compatDirname } from 'umi-utils';
+import { join, dirname } from "path";
 
 const defaultOpts = {
   dva: {
@@ -42,19 +43,25 @@ export default function(api, options) {
     `vue-template-compiler@${require("vue-template-compiler/package").version}`
   ]);
 
+  // const vueDir = compatDirname(
+  //   'vue/package.json',
+  //   service.cwd,
+  //   dirname(require.resolve('vue/package.json')),
+  // );
+
   api.modifyAFWebpackOpts(memo => {
     return {
       ...memo,
       alias: {
         ...(memo.alias || {}),
         "@ddot/umi-vue/dynamic": "@ddot/umi-vue/lib/dynamic.js"
+        // "vue": vueDir
       }
     };
   });
 
   const plugins = {
     hardSource: () => require("./plugins/hardSource").default,
-
     routes: () => require("./plugins/routes").default,
     dva: () => require("./plugins/dva").default
   };
