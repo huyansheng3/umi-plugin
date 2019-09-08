@@ -5,7 +5,7 @@ var VueLoaderPlugin = require("vue-loader/lib/plugin");
 var routerVue = "require('./router').default";
 function default_1(api, opts) {
     if (opts === void 0) { opts = {}; }
-    var _a = opts.vueLoaderOptions, vueLoaderOptions = _a === void 0 ? {} : _a;
+    var vueLoaderOption = opts.vueLoaderOption;
     var config = api.config, paths = api.paths;
     var mountElementId = config.mountElementId || "root";
     api.chainWebpackConfig(function (webpackConfig) {
@@ -30,7 +30,7 @@ function default_1(api, opts) {
     });
     api.addRuntimePlugin(path_1.join(__dirname, "./runtime"));
     api.modifyEntryRender(function () {
-        return "\n    window.g_plugins.apply('rootContainer', {\n      initialValue: {router: " + routerVue + ", Vue},\n    }).$mount('#" + mountElementId + "');";
+        return "\n    window.g_plugins.apply('rootContainer', {\n      initialValue: {router: " + routerVue + ", Vue, store: g_app._store},\n    }).$mount('#" + mountElementId + "');";
     });
     api.modifyEntryHistory(function () {
         return routerVue + ".history";

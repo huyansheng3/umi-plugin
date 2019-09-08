@@ -4,7 +4,7 @@ const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const routerVue = `require('./router').default`;
 
 export default function(api, opts = {}) {
-  const { vueLoaderOptions = {} } = opts;
+  const { vueLoaderOption } = opts;
   const { config, paths } = api;
 
   const mountElementId = config.mountElementId || "root";
@@ -38,7 +38,7 @@ export default function(api, opts = {}) {
   api.modifyEntryRender(() => {
     return `
     window.g_plugins.apply('rootContainer', {
-      initialValue: {router: ${routerVue}, Vue},
+      initialValue: {router: ${routerVue}, Vue, store: g_app._store},
     }).$mount('#${mountElementId}');`;
   });
 

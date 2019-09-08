@@ -1,10 +1,11 @@
 import Vue from 'vue';
-import umiVue from '@ddot/umi-vue';
+import umiVue from '@didi/umi-vue';
 
 const runtimeVuex = window.g_plugins.mergeConfig('vuex');
 
 let app = umiVue({
   ...(runtimeVuex.config || {}),
+  Vue: Vue
 });
 
 window.g_app = app;

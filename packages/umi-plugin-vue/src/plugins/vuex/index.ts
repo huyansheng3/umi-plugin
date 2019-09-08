@@ -91,28 +91,16 @@ function getGlobalModels(api, shouldImportDynamic) {
 
 function addVersionInfo(api) {
   const { cwd, compatDirname } = api;
-  const dvaDir = compatDirname(
-    "dva-core/package.json",
-    cwd,
-    dirname(require.resolve("dva-core/package.json"))
-  );
 
   api.addVersionInfo([
-    `dva-core@${require(join(dvaDir, "package.json")).version} (${dvaDir})`,
-    `dva-loading@${require("dva-loading/package").version}`,
-    `dva-immer@${require("dva-immer/package").version}`,
-
-    `@ddot/umi-vue@${require("@ddot/umi-vue/package").version}`
+    `vuex@${require("vuex/package").version}`,
+    `@didi/umi-vue@${require("@didi/umi-vue/package").version}`
   ]);
 }
 
 function addPageWatcher(api) {
   const { paths } = api;
-  api.addPageWatcher([
-    join(paths.absSrcPath, "models"),
-    join(paths.absSrcPath, "dva.js"),
-    join(paths.absSrcPath, "dva.ts")
-  ]);
+  api.addPageWatcher([join(paths.absSrcPath, "models")]);
 }
 
 export default function(
@@ -127,24 +115,10 @@ export default function(
 
   addVersionInfo(api);
   addPageWatcher(api);
-  api.addRuntimePluginKey("dva");
-
-  function getDvaJS() {
-    const dvaJS = findJSFile(paths.absSrcPath, "dva", JS_EXTNAMES);
-    if (dvaJS) {
-      return winPath(dvaJS);
-    }
-  }
+  api.addRuntimePluginKey("vuex");
 
   function getPluginContent() {
     const ret = [];
-    if (opts.immer) {
-      ret.push(
-        `
-    app.use(require('${winPath(require.resolve("dva-immer"))}').default());
-          `.trim()
-      );
-    }
     return ret.join("\r\n");
   }
 
@@ -166,11 +140,7 @@ export default function(
 
   api.onGenerateFiles(() => {
     const wrapperTpl = readFileSync(template(tplfile), "utf-8");
-    const dvaJS = getDvaJS();
     const wrapperContent = render(wrapperTpl, {
-      ExtendDvaConfig: dvaJS
-        ? `...((require('${dvaJS}').config || (() => ({})))()),`
-        : "",
       RegisterPlugins: getPluginContent(),
       RegisterModels: getGlobalModelContent()
     });
@@ -186,7 +156,7 @@ export default function(
 
   if (opts.shouldImportDynamic) {
     api.addRouterImport({
-      source: "@ddot/umi-vue/dynamic",
+      source: "@didi/umi-vue/dynamic",
       specifier: "_dvaDynamic"
     });
 

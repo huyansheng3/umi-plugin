@@ -10,20 +10,11 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 // import { compatDirname } from 'umi-utils';
 var path_1 = require("path");
 var defaultOpts = {
-    dva: {
-        immer: true
-    },
+    vuex: {},
     routes: {
         exclude: [/model/]
     },
@@ -47,18 +38,13 @@ function default_1(api, options) {
         "vue-router@" + require("vue-router/package").version,
         "vue-template-compiler@" + require("vue-template-compiler/package").version
     ]);
-    // const vueDir = compatDirname(
-    //   'vue/package.json',
-    //   service.cwd,
-    //   dirname(require.resolve('vue/package.json')),
-    // );
     api.modifyAFWebpackOpts(function (memo) {
-        return __assign(__assign({}, memo), { alias: __assign(__assign({}, (memo.alias || {})), { "@ddot/umi-vue/dynamic": "@ddot/umi-vue/lib/dynamic.js" }) });
+        return __assign(__assign({}, memo), { alias: __assign(__assign({}, (memo.alias || {})), { "@didi/umi-vue/dynamic": "@didi/umi-vue/lib/dynamic.js", "vue": require.resolve('vue') }) });
     });
     var plugins = {
         hardSource: function () { return require("./plugins/hardSource").default; },
         routes: function () { return require("./plugins/routes").default; },
-        dva: function () { return require("./plugins/dva").default; }
+        vuex: function () { return require("./plugins/vuex").default; }
     };
     api.registerPlugin({
         id: getId("vue"),
@@ -68,13 +54,12 @@ function default_1(api, options) {
         if (option[key]) {
             var opts = option[key];
             if (key === "dll") {
-                var havDva = option["dva"] ? ["dva-core", "dva-immer"] : [];
-                opts.include = (opts.include || []).concat(__spreadArrays([
+                opts.include = (opts.include || []).concat([
                     "vue",
-                    "vue-router"
-                ], havDva));
+                    "vue-router",
+                ]);
             }
-            else if (key === "dva") {
+            else if (key === "vuex") {
                 opts = __assign(__assign({}, opts), { shouldImportDynamic: option.dynamicImport });
             }
             api.registerPlugin({

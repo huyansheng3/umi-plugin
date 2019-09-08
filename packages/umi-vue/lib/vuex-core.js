@@ -14,6 +14,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var vuex_1 = require("vuex");
 var App = /** @class */ (function () {
     function App(config) {
+        var Vue = config.Vue;
+        if (!Vue) {
+            console.error('[umi vue] global Vue为undefined');
+        }
+        Vue.use(vuex_1.default);
         this._store = new vuex_1.default.Store(__assign({}, config));
         this.registerConfig = config.registerConfig;
     }
@@ -25,6 +30,7 @@ var App = /** @class */ (function () {
     };
     return App;
 }());
+exports.App = App;
 function create(config) {
     return new App(config);
 }

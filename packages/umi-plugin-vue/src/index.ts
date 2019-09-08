@@ -2,9 +2,7 @@
 import { join, dirname } from "path";
 
 const defaultOpts = {
-  dva: {
-    immer: true
-  },
+  vuex: {},
   routes: {
     exclude: [/model/]
   },
@@ -43,19 +41,13 @@ export default function(api, options) {
     `vue-template-compiler@${require("vue-template-compiler/package").version}`
   ]);
 
-  // const vueDir = compatDirname(
-  //   'vue/package.json',
-  //   service.cwd,
-  //   dirname(require.resolve('vue/package.json')),
-  // );
-
   api.modifyAFWebpackOpts(memo => {
     return {
       ...memo,
       alias: {
         ...(memo.alias || {}),
-        "@ddot/umi-vue/dynamic": "@ddot/umi-vue/lib/dynamic.js"
-        // "vue": vueDir
+        "@didi/umi-vue/dynamic": "@didi/umi-vue/lib/dynamic.js",
+        vue: require.resolve("vue")
       }
     };
   });
@@ -63,7 +55,7 @@ export default function(api, options) {
   const plugins = {
     hardSource: () => require("./plugins/hardSource").default,
     routes: () => require("./plugins/routes").default,
-    dva: () => require("./plugins/dva").default
+    vuex: () => require("./plugins/vuex").default
   };
 
   api.registerPlugin({
@@ -76,13 +68,8 @@ export default function(api, options) {
       let opts = option[key];
 
       if (key === "dll") {
-        const havDva = option["dva"] ? ["dva-core", "dva-immer"] : [];
-        opts.include = (opts.include || []).concat([
-          "vue",
-          "vue-router",
-          ...havDva
-        ]);
-      } else if (key === "dva") {
+        opts.include = (opts.include || []).concat(["vue", "vue-router"]);
+      } else if (key === "vuex") {
         opts = {
           ...opts,
           shouldImportDynamic: option.dynamicImport
