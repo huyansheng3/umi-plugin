@@ -49,6 +49,11 @@ module.exports = class BasicGenerator extends Generator {
       this.templatePath("app", "src", "pages", "index"),
       this.destinationPath("src/pages/index")
     );
+
+    this.fs.copy(
+      this.templatePath("app", "src", "pages", "list"),
+      this.destinationPath("src/pages/list")
+    );
     this.fs.copy(
       this.templatePath("app", "src", "global.less"),
       this.destinationPath("src/global.less")
