@@ -14,6 +14,11 @@ export default function umiVue(config) {
 }
 
 export const dispatch = (...rest) => store.dispatch.bind(store)(...rest);
+export const commit = (...rest) => store.commit.bind(store)(...rest);
+export const watch = (...rest) => store.watch.bind(store)(...rest);
+export const subscribe = (...rest) => store.subscribe.bind(store)(...rest);
+export const subscribeAction = (...rest) =>
+  store.subscribeAction.bind(store)(...rest);
 
 export { mapState } from "vuex";
 export { mapGetters } from "vuex";

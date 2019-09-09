@@ -1,26 +1,26 @@
-
 <template>
   <div>
-    Hello, {{ isAuth }} {{ name }} for {{lang}}! <br />
+    Hello, {{ count }} {{ name }} for {{ lang }}! <br />
     <button @click="onClick">touch me</button>
   </div>
 </template>
 <script>
-import { mapState, dispatch } from '@ddot/umi-vue';
+import { mapState, dispatch, commit } from '@didi/umi-vue';
 export default {
   computed: {
     ...mapState({
-      isAuth: state => state.model.isAuth,
+      isAuth: state => state.index.isAuth,
+      name: state => state.index.name,
+      count: state => state.index.count,
+      lang: state => state.global.lang,
     }),
-    ...mapState('model', ['name']),
-    ...mapState('global', ['lang']),
   },
   updated() {
     console.log(1);
   },
   methods: {
     onClick() {
-      dispatch({ type: 'model/logout' });
+      commit({ type: 'index/increment' });
     },
   },
 };

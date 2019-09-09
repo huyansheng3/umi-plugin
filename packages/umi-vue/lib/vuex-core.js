@@ -16,14 +16,14 @@ var App = /** @class */ (function () {
     function App(config) {
         var Vue = config.Vue;
         if (!Vue) {
-            console.error('[umi vue] global Vue为undefined');
+            console.error("[umi vue] global Vue为undefined");
         }
         Vue.use(vuex_1.default);
         this._store = new vuex_1.default.Store(__assign({}, config));
         this.registerConfig = config.registerConfig;
     }
     App.prototype.model = function (model) {
-        return this._store.registerModule(model.namespace, model, this.registerConfig);
+        return this._store.registerModule(model.namespace, __assign({ namespaced: true }, model), this.registerConfig);
     };
     App.prototype.unmodel = function (model) {
         return this._store.unregisterModule(model.namespace, this.registerConfig);

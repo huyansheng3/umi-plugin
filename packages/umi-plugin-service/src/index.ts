@@ -101,7 +101,7 @@ export default function(
       ...memo,
       alias: {
         ...(memo.alias || {}),
-        "@ddot/umi-service": join(paths.absTmpDirPath, tplfile)
+        "@didi/umi-service": join(paths.absTmpDirPath, tplfile)
       }
     };
   });

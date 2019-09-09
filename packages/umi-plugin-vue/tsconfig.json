@@ -6,7 +6,7 @@
     "suppressImplicitAnyIndexErrors": true,
     "allowJs": true,
     "module": "commonjs",
-    "target": "es5",
+    "target": "ESNext",
     "lib": ["es6", "es7", "dom"]
   },
   "include": ["./src/**/*"],

@@ -92,7 +92,7 @@ function default_1(api, options) {
     });
     /** 修改配置文件 */
     api.modifyAFWebpackOpts(function (memo) {
-        return __assign(__assign({}, memo), { alias: __assign(__assign({}, (memo.alias || {})), { "@ddot/umi-service": path_1.join(paths.absTmpDirPath, tplfile) }) });
+        return __assign(__assign({}, memo), { alias: __assign(__assign({}, (memo.alias || {})), { "@didi/umi-service": path_1.join(paths.absTmpDirPath, tplfile) }) });
     });
 }
 exports.default = default_1;

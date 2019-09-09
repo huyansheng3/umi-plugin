@@ -14,17 +14,6 @@
     "yeoman-generator": "^3.1.1"
   },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jetsly/umi-plugin/tree/master/packages/create-umi-vue"
-  },
-  "homepage": "https://github.com/jetsly/umi-plugin/tree/master/packages/create-umi-vue",
-  "authors": [
-    "jetsly <cnljli@live.com (https://github.com/jetsly)"
-  ],
-  "bugs": {
-    "url": "https://github.com/jetsly/umi-plugin/issues"
-  },
   "files": [
     "bin",
     "lib",

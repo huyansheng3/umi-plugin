@@ -17,6 +17,10 @@ export default function(api, opts = {}) {
       .exclude.add(/\.vue$/)
       .end();
 
+    webpackConfig.when(process.env.NODE_ENV === "development", config =>
+      config.devtool("eval-source-map")
+    );
+
     webpackConfig.module
       .delete("jsx")
       .rule("vue")

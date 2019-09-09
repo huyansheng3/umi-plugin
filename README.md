@@ -6,5 +6,5 @@
 
 ### plugins
 
-* [@ddot/umi-plugin-service](https://www.npmjs.com/package/@ddot/umi-plugin-service)
-* [@ddot/umi-plugin-vue](https://www.npmjs.com/package/@ddot/umi-plugin-vue)
+* [@didi/umi-plugin-service](https://www.npmjs.com/package/@didi/umi-plugin-service)
+* [@didi/umi-plugin-vue](https://www.npmjs.com/package/@didi/umi-plugin-vue)

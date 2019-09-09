@@ -1,19 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var path_1 = require("path");
-var VueLoaderPlugin = require("vue-loader/lib/plugin");
-var routerVue = "require('./router').default";
-function default_1(api, opts) {
-    if (opts === void 0) { opts = {}; }
-    var vueLoaderOption = opts.vueLoaderOption;
-    var config = api.config, paths = api.paths;
-    var mountElementId = config.mountElementId || "root";
-    api.chainWebpackConfig(function (webpackConfig) {
+const path_1 = require("path");
+const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const routerVue = `require('./router').default`;
+function default_1(api, opts = {}) {
+    const { vueLoaderOption } = opts;
+    const { config, paths } = api;
+    const mountElementId = config.mountElementId || "root";
+    api.chainWebpackConfig(webpackConfig => {
         webpackConfig.resolve.extensions.merge([".vue"]);
         webpackConfig.module
             .rule("exclude")
             .exclude.add(/\.vue$/)
             .end();
+        webpackConfig.when(process.env.NODE_ENV === 'development', config => config.devtool('eval-source-map'));
         webpackConfig.module
             .delete("jsx")
             .rule("vue")
@@ -29,13 +29,16 @@ function default_1(api, opts) {
         return webpackConfig;
     });
     api.addRuntimePlugin(path_1.join(__dirname, "./runtime"));
-    api.modifyEntryRender(function () {
-        return "\n    window.g_plugins.apply('rootContainer', {\n      initialValue: {router: " + routerVue + ", Vue, store: g_app._store},\n    }).$mount('#" + mountElementId + "');";
+    api.modifyEntryRender(() => {
+        return `
+    window.g_plugins.apply('rootContainer', {
+      initialValue: {router: ${routerVue}, Vue, store: g_app._store},
+    }).$mount('#${mountElementId}');`;
     });
-    api.modifyEntryHistory(function () {
-        return routerVue + ".history";
+    api.modifyEntryHistory(() => {
+        return `${routerVue}.history`;
     });
-    api.modifyRouterRootComponent(function () {
+    api.modifyRouterRootComponent(() => {
         return config.history || "history";
     });
 }

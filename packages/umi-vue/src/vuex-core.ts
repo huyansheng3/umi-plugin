@@ -22,7 +22,10 @@ export class App<IApp> {
   model(model) {
     return this._store.registerModule(
       model.namespace,
-      model,
+      {
+        namespaced: true,
+        ...model
+      },
       this.registerConfig
     );
   }

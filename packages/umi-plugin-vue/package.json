@@ -3,20 +3,9 @@
   "version": "0.0.2",
   "description": "A umi plugin for support vuejs",
   "main": "./lib/index.js",
-  "authors": [
-    "jetsly <cnljli@live.com (https://github.com/jetsly)"
-  ],
   "scripts": {
     "test": "ts-mocha  src/**/*.spec.ts",
-    "prepublish": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/jetsly/umi-plugin/tree/master/packages/umi-plugin-vue"
-  },
-  "homepage": "https://github.com/jetsly/umi-plugin/tree/master/packages/umi-plugin-vue",
-  "bugs": {
-    "url": "https://github.com/jetsly/umi-plugin/issues"
+    "prepublish": "tsc && cp -r ./src/generators/vue/templates ./lib/generators/vue/"
   },
   "license": "MIT",
   "files": [
@@ -34,13 +23,17 @@
     "@types/mocha": "^5.2.5",
     "@types/mustache": "^0.8.31",
     "@types/node": "^10.9.4",
+    "chalk": "^2.4.2",
     "mocha": "^5.2.0",
+    "random-color": "^1.0.1",
     "ts-mocha": "^2.0.0",
     "typescript": "^3.0.3",
     "webpack": "^4.39.3"
   },
   "dependencies": {
     "@didi/umi-vue": "^0.0.4",
+    "assert": "^2.0.0",
+    "debug": "^4.1.1",
     "dva-immer": "^0.2.3",
     "dva-loading": "^2.0.5",
     "globby": "^7.1.1",

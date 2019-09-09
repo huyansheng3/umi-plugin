@@ -2,20 +2,12 @@
   "name": "@didi/umi-vue",
   "version": "0.0.4",
   "main": "./lib/index.js",
-  "authors": [
-    "jetsly <cnljli@live.com (https://github.com/jetsly)"
-  ],
   "repository": {
-    "type": "git",
-    "url": "https://github.com/jetsly/umi-plugin/tree/master/packages/umi-vue"
+    "type": "git"
   },
   "scripts": {
     "test": "ts-mocha  src/**/*.spec.ts",
     "prepublish": "tsc"
-  },
-  "homepage": "https://github.com/jetsly/umi-plugin/tree/master/packages/umi-vue",
-  "bugs": {
-    "url": "https://github.com/jetsly/umi-plugin/issues"
   },
   "license": "MIT",
   "files": [

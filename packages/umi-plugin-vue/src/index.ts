@@ -1,6 +1,8 @@
 // import { compatDirname } from 'umi-utils';
 import { join, dirname } from "path";
 
+const debug = require("debug")("umi-plugin-vue:index");
+
 const defaultOpts = {
   vuex: {},
   routes: {
@@ -47,7 +49,9 @@ export default function(api, options) {
       alias: {
         ...(memo.alias || {}),
         "@didi/umi-vue/dynamic": "@didi/umi-vue/lib/dynamic.js",
-        vue: require.resolve("vue")
+        vue: require.resolve("vue/dist/vue.esm.js"),
+        vuex: require.resolve("vuex/dist/vuex.esm.js"),
+        "vue-router": require.resolve("vue-router/dist/vue-router.esm.js")
       }
     };
   });
@@ -57,6 +61,11 @@ export default function(api, options) {
     routes: () => require("./plugins/routes").default,
     vuex: () => require("./plugins/vuex").default
   };
+
+  api.registerGenerator("vue", {
+    Generator: require("./generators/vue").default(api),
+    resolved: join(__dirname, "./generators/vue")
+  });
 
   api.registerPlugin({
     id: getId("vue"),

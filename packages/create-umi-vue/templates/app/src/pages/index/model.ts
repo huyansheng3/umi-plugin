@@ -1,19 +1,15 @@
 export default {
-  namespace: 'model',
+  namespace: 'index',
   state: {
     isAuth: false,
-    name: 'ddot',
+    name: 'hys',
+    count: 1,
   },
-  reducers: {
-    changeAuth(state) {
-      state.isAuth = true;
+  getters: {},
+  mutations: {
+    increment(state) {
+      state.count++;
     },
   },
-  effects: {
-    *logout(_, { call, put }) {
-      yield put({
-        type: 'changeAuth',
-      });
-    },
-  },
+  actions: {},
 };

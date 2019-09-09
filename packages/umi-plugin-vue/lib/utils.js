@@ -1,15 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var fs_1 = require("fs");
-var path_1 = require("path");
-var umi_utils_1 = require("umi-utils");
-var JS_EXTNAMES = [".vue"];
-function findJSFile(baseDir, fileNameWithoutExtname, fileExt) {
-    if (fileExt === void 0) { fileExt = JS_EXTNAMES; }
-    for (var _i = 0, fileExt_1 = fileExt; _i < fileExt_1.length; _i++) {
-        var extname_1 = fileExt_1[_i];
-        var fileName = "" + fileNameWithoutExtname + extname_1;
-        var absFilePath = path_1.join(baseDir, fileName);
+const fs_1 = require("fs");
+const path_1 = require("path");
+const umi_utils_1 = require("umi-utils");
+const JS_EXTNAMES = [".vue"];
+function findJSFile(baseDir, fileNameWithoutExtname, fileExt = JS_EXTNAMES) {
+    for (const extname of fileExt) {
+        const fileName = `${fileNameWithoutExtname}${extname}`;
+        const absFilePath = path_1.join(baseDir, fileName);
         if (fs_1.existsSync(absFilePath)) {
             return absFilePath;
         }
@@ -32,7 +30,7 @@ function isValidJS(file) {
 }
 exports.isValidJS = isValidJS;
 function endWithSlash(path) {
-    return path.slice(-1) !== "/" ? path + "/" : path;
+    return path.slice(-1) !== "/" ? `${path}/` : path;
 }
 exports.endWithSlash = endWithSlash;
 function stripFirstSlash(path) {

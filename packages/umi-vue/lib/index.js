@@ -15,6 +15,34 @@ exports.dispatch = function () {
     }
     return store.dispatch.bind(store).apply(void 0, rest);
 };
+exports.commit = function () {
+    var rest = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        rest[_i] = arguments[_i];
+    }
+    return store.commit.bind(store).apply(void 0, rest);
+};
+exports.watch = function () {
+    var rest = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        rest[_i] = arguments[_i];
+    }
+    return store.watch.bind(store).apply(void 0, rest);
+};
+exports.subscribe = function () {
+    var rest = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        rest[_i] = arguments[_i];
+    }
+    return store.subscribe.bind(store).apply(void 0, rest);
+};
+exports.subscribeAction = function () {
+    var rest = [];
+    for (var _i = 0; _i < arguments.length; _i++) {
+        rest[_i] = arguments[_i];
+    }
+    return store.subscribeAction.bind(store).apply(void 0, rest);
+};
 var vuex_1 = require("vuex");
 exports.mapState = vuex_1.mapState;
 var vuex_2 = require("vuex");
